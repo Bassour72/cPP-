@@ -1,13 +1,14 @@
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <limits>
+
 
 void pause_prompt(const char* sms)
 {
+    std::string dummy;
+    std::cout << sms << std::endl;
     std::cin.clear();
-    std::cout << sms;
-    std::cin.get(); // wait for Enter
-    system("clear"); // optional, but not recommended
+    std::cin.ignore(1000000, '\n');
+    std::getline(std::cin, dummy);
+    std::system("clear");
 }
 
 std::string ReadUserEnter(std::string display)
@@ -20,10 +21,11 @@ std::string ReadUserEnter(std::string display)
     
     return input;
 }
-void StartPhoneBook(void)
+void startPhoneBook(void)
 {
     PhoneBook phonebook;
     int totalContacts = 0;
+    int index = 0;
     std::string input;
     do
     {
@@ -33,37 +35,39 @@ void StartPhoneBook(void)
             return;
         if (input == "")
          { 
-                system("clear"); 
-                continue;
+            system("clear"); 
+            continue;
         }
         else if (input == "ADD")
         {
-            if (phonebook.CreatePhoneBookProfile(Contact::AddCo() ,totalContacts))
-                 totalContacts++;
-             pause_prompt("Press Enter to continue...");
+            if (phonebook.createPhoneBookProfile(Contact::addCo() ,totalContacts))
+                 totalContacts = phonebook.getContactCount();
+            pause_prompt("Press Enter to continue... \n");
         }
         else if (input == "SEARCH")
         {
-            phonebook.DisplayContactList(totalContacts);
-            int i = phonebook.Read_ini("Enter index :");   
-            phonebook.DisplayContactByIndex(i, totalContacts);
-            pause_prompt("Press Enter to continue...");
+            phonebook.displayContactList(totalContacts);
+            index  = phonebook.read_ini("Enter index :");   
+            phonebook.displayContactByIndex(index, totalContacts);
+            pause_prompt("Press Enter to continue...\n");
         }
         else if (input == "EXIT")
         {
-            return ;
+            return;
         }
         else
         {
-            system("clear"); // optional, but not recommended
-            std::cout << "invalid input \n";
+           std::system("clear");
+            std::cout << "invalid input `" << input << "`" << std::endl;
 
         }
+        
     } while (1);
     
 }
 int main(void)
 {
-    StartPhoneBook();
+    startPhoneBook();
+
     return 0;
 }

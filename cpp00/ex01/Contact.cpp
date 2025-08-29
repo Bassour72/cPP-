@@ -1,55 +1,55 @@
- 
  #include "Contact.hpp"
-
- Contact::Contact(/* args */)
+ #include "Contact.hpp"
+#include "Contact.hpp"
+Contact::Contact(/* args */)
 {
     this->markAsExists();
 }
 
-void Contact::SetFirstName(std::string FirstName)
+void Contact::setFirstName(std::string FirstName)
 {
-    this->first_name = FirstName;
+    this->_first_name = FirstName;
 }
-void Contact::SetLastName(std::string LastName)
+void Contact::setLastName(std::string LastName)
 {
-    this->last_name = LastName;
+    this->_last_name = LastName;
 }
-void Contact::SetNickName(std::string NickName)
+void Contact::setNickName(std::string NickName)
 {
-    this->nickname = NickName;
+    this->_nickname = NickName;
 }
-void Contact::SetPhoneNumber(std::string PhoneNumber)
+void Contact::setPhoneNumber(std::string PhoneNumber)
 {
-    this->phone_number = PhoneNumber;
+    this->_phone_number = PhoneNumber;
 }
 
-void Contact::SetDarkestSecret(std::string DarkestSecret)
+void Contact::setDarkestSecret(std::string DarkestSecret)
 {
-    this->darkest_secret = DarkestSecret;
+    this->_darkest_secret = DarkestSecret;
 }
     /// getters
-std::string Contact::GetFirstName(void)
+std::string Contact::getFirstName(void)
 {
-    return (this->first_name);
+    return (this->_first_name);
 }
-std::string Contact::GetLastName(void)
+std::string Contact::getLastName(void)
 {
-    return (this->last_name);
+    return (this->_last_name);
 }
-std::string Contact::GetNickName(void)
+std::string Contact::getNickName(void)
 {
-    return (this->nickname);
+    return (this->_nickname);
 }
-std::string Contact::GetPhoneNumber(void)
+std::string Contact::getPhoneNumber(void)
 {
-    return (this->phone_number);
+    return (this->_phone_number);
 }
-std::string Contact::GetDarkestSecret(void)
+std::string Contact::getDarkestSecret(void)
 {
-    return (this->darkest_secret);
+    return (this->_darkest_secret);
 }
 
-bool Contact::IsValidName(const std::string &name)
+bool Contact::isValidName(const std::string &name)
 {
     if (name.empty())
         return false;
@@ -59,10 +59,10 @@ bool Contact::IsValidName(const std::string &name)
             return false;
     }
     
-    return true;
+    return (true);
 }
 
-bool Contact::IsValidDarkestSecret(const std::string &name)
+bool Contact::isValidDarkestSecret(const std::string &name)
 {
     if (name.empty())
         return false;
@@ -72,122 +72,114 @@ bool Contact::IsValidDarkestSecret(const std::string &name)
             return false;
     }
     
-    return true;
+    return (true);
 }
-bool Contact::IsPhoneNumber(const std::string &name)
+bool Contact::isPhoneNumber(const std::string &name)
 {
     size_t i = 0;
     if (name.empty())
         return false;
-    if(name[i] == '+')
-        i++;
     for (i = 0; i < name.length(); i++)
     {
         if (!std::isdigit((char)(name[i])))
             return false;
     }
     
-    return true;
+    return (true);
 }
 
-std::string Contact::ReadUserEnter(std::string display)
+std::string Contact::readUserEnter(std::string display)
 {
     std::string input;
     std::cout << display << std::endl;
     std::getline(std::cin, input);
     
-    return input;
+    return (input);
 }
 
-int Contact::AddFirstName(void) 
+int Contact::addFirstName(void) 
 {
-    std::string input = ReadUserEnter("Enter the first name: ");
-    if (!this->IsValidName(input))
+    std::string input = readUserEnter("Enter the first name: ");
+    if (!this->isValidName(input))
     {
-        this->SetExists(false);
+        this->setExists(false);
         return (0);
     }
-    this->SetFirstName(input);
+    this->setFirstName(input);
     return (1);
 }
 
-int Contact::AddLastName(void) 
+int Contact::addLastName(void) 
 {
-    std::string input = ReadUserEnter("Enter the last name: ");
-    if (!this->IsValidName(input))
+    std::string input = readUserEnter("Enter the last name: ");
+    if (!this->isValidName(input))
     {
-        this->SetExists(false);
+        this->setExists(false);
         return (0);
     }
-    this->SetLastName(input);
+    this->setLastName(input);
     return (1);
 }
 
-int Contact::AddPhoneNumber(void) 
+int Contact::addPhoneNumber(void) 
 {
-    std::string input = ReadUserEnter("Enter the phone number: ");
-    if (!this->IsPhoneNumber(input))
+    std::string input = readUserEnter("Enter the phone number: ");
+    if (!this->isPhoneNumber(input))
     {
-        this->SetExists(false);
+        this->setExists(false);
         return (0);
     }
-    this->SetPhoneNumber(input);
+    this->setPhoneNumber(input);
     return (1);
 }
 
-int Contact::AddNickName(void) 
+int Contact::addNickName(void) 
 {
-    std::string input = ReadUserEnter("Enter the nickname: ");
-    if (!this->IsValidName(input))
+    std::string input = readUserEnter("Enter the nickname: ");
+    if (!this->isValidName(input))
     {
-        this->SetExists(false);
+        this->setExists(false);
         return (0);
     };
-    this->SetNickName(input);
+    this->setNickName(input);
     return (1);
 }
 
-int Contact::AddDarkestSecret(void) 
+int Contact::addDarkestSecret(void) 
 {
-    std::string input = ReadUserEnter("Enter the darkest secret: ");
-    if (!this->IsValidDarkestSecret(input))
+    std::string input = readUserEnter("Enter the darkest secret: ");
+    if (!this->isValidDarkestSecret(input))
     {
-        this->SetExists(false);
+        this->setExists(false);
         return (0);
     }
-    this->SetDarkestSecret(input);
+    this->setDarkestSecret(input);
     return (1);
 }
 
-bool Contact::Exists() const 
+bool Contact::exists() const 
 {
-    return this->exists;
+    return (this->_exists);
 }
 
-void Contact::SetExists(bool val) 
+void Contact::setExists(bool val) 
 {
-    this->exists = val;
+    this->_exists = val;
 }
 
 void Contact::markAsExists() 
 {
-    this->exists = true;
+    this->_exists = true;
 }
 
-void Contact::clear()
-{
-    this->exists = false;
-}
-
-
-Contact Contact::AddCo(void) 
+Contact Contact::addCo(void) 
 {
     Contact contact;
-    contact.AddFirstName();
-    contact.AddLastName();
-    contact.AddPhoneNumber();
-    contact.AddNickName();
-    contact.AddDarkestSecret();
+    contact.addFirstName();
+    contact.addLastName();
+    contact.addPhoneNumber();
+    contact.addNickName();
+    contact.addDarkestSecret();
     return (contact);
 }
 
