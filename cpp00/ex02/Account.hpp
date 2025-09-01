@@ -19,8 +19,8 @@
 //                               Account Class                                //
 // ************************************************************************** //
 
-class Account {
-
+class Account 
+{
 
 public:
 
@@ -33,16 +33,13 @@ public:
 	static void	displayAccountsInfos( void );
 
 	Account( int initial_deposit);
-	Account(int initial_deposi, int amount);
+	Account(int initial_deposit, int amount);
 	~Account( void );
 	void	makeDeposit( int deposit );
 	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
 	void	displayStatus( void ) const;
-
-
 private:
-
 	static int	_nbAccounts;
 	static int	_totalAmount;
 	static int	_totalNbDeposits;

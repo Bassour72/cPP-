@@ -9,14 +9,12 @@
 class PhoneBook 
 {
 private:
-		static int _maxPhoneBookContact;
-		Contact contacts[10];
-
+		int _maxPhoneBookContact;
+		Contact contacts[8];
 public:
 		PhoneBook();
 		int			getContactCount() const;
-		int			createPhoneBookProfile(Contact contacts, int pos);
-		int			read_ini(std::string display = "");
+		int			createPhoneBookProfile(int pos);
 		std::string	readUserEnter(std::string display = "");
 		std::string	formatField(const std::string &field);
 		void		setMaxContacts(int maxPhoneBookContact);

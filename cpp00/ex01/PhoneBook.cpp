@@ -1,8 +1,8 @@
 #include "PhoneBook.hpp"
 
-int PhoneBook::_maxPhoneBookContact = 0;
 PhoneBook::PhoneBook() 
 {
+    _maxPhoneBookContact = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -29,16 +29,16 @@ void PhoneBook::displayPhonebookMenu(void)
     std::cout << " 👉 Enter your command: ";
 }
 
-int PhoneBook::createPhoneBookProfile(Contact contacts, int pos) 
-{
-    if (!contacts.exists())
-        return 0;
 
+int PhoneBook::createPhoneBookProfile(int pos) 
+{
     int totalContact = getContactCount();
 
     pos = totalContact % 8;
-    this->contacts[pos] = contacts;
+    contacts[pos].addCo();
 
+    if (!contacts[pos].exists())
+        return 0;
     if (totalContact < 8)
         setMaxContacts(totalContact + 1);
     else
@@ -46,34 +46,6 @@ int PhoneBook::createPhoneBookProfile(Contact contacts, int pos)
 
     return 1;
 }
-
-
- int PhoneBook::read_ini(std::string display)
- {
-    int input;
-    std::cout << display << std::endl;
-    std::cin >> input;
-    while (std::cin.fail())
-    {
-        if (std::cin.eof()) 
-        {
-            std::cin.clear();                 // clear EOF state
-            std::cin.ignore(100000, '\n');
-                // // flush input buffer
-                // std::cin.putback('0');
-            continue;                  // reprompt
-        }
-        else if (std::cin.fail())
-        {
-            std::cout << "Invalid input!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(100000, '\n');
-            std::cout << display << std::endl;
-            std::cin >> input;
-         }
-    }
-    return input;
- }
 
 std::string PhoneBook::formatField(const std::string &field)
 {

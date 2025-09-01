@@ -1,6 +1,7 @@
- #include "Contact.hpp"
- #include "Contact.hpp"
 #include "Contact.hpp"
+#include "Contact.hpp"
+#include "Contact.hpp"
+
 Contact::Contact(/* args */)
 {
     this->markAsExists();
@@ -52,39 +53,34 @@ std::string Contact::getDarkestSecret(void)
 bool Contact::isValidName(const std::string &name)
 {
     if (name.empty())
-        return false;
+        return (false);
     for (size_t i = 0; i < name.length(); i++)
     {
         if (!std::isalpha((char)(name[i])))
-            return false;
+            return (false);
     }
-    
     return (true);
 }
 
-bool Contact::isValidDarkestSecret(const std::string &name)
+bool Contact::isValidDarkestSecret(const std::string &secret)
 {
-    if (name.empty())
-        return false;
-    for (size_t i = 0; i < name.length(); i++)
-    {
-        if (!std::isdigit((char)(name[i])))
-            return false;
-    }
-    
+    if (secret.empty())
+        return (false);
     return (true);
 }
+
 bool Contact::isPhoneNumber(const std::string &name)
 {
     size_t i = 0;
     if (name.empty())
         return false;
+    if (name[i] == '+')
+        i++;
     for (i = 0; i < name.length(); i++)
     {
         if (!std::isdigit((char)(name[i])))
             return false;
     }
-    
     return (true);
 }
 
@@ -172,15 +168,21 @@ void Contact::markAsExists()
     this->_exists = true;
 }
 
-Contact Contact::addCo(void) 
+
+Contact &Contact::addCo(void)
 {
-    Contact contact;
-    contact.addFirstName();
-    contact.addLastName();
-    contact.addPhoneNumber();
-    contact.addNickName();
-    contact.addDarkestSecret();
-    return (contact);
+    this->addFirstName();
+    this->addLastName();
+    this->addPhoneNumber();
+    this->addNickName();
+    this->addDarkestSecret();
+
+    if (this->exists())
+        std::cout << "Contact create successfully " << std::endl;
+    else
+        std::cout << "Error: cannot create contact " << std::endl;
+
+    return *this;
 }
 
 Contact::~Contact()

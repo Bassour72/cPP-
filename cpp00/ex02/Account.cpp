@@ -25,6 +25,19 @@ Account::Account(int initial_deposit)
               << ";amount:" << _amount
               << ";created" << std::endl;
 }
+Account::Account(int initial_deposit, int amount)
+{
+    _amount = initial_deposit + amount;
+    _accountIndex = _nbAccounts;
+    _nbDeposits = 0;
+    _nbWithdrawals = 0;
+    _nbAccounts++;
+    _totalAmount += _amount;
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex
+              << ";amount:" << _amount
+              << ";created" << std::endl;
+}
 
 // ---------------------- [ Destructor ] -----------------------//
 Account::~Account(void)
@@ -38,19 +51,19 @@ Account::~Account(void)
 // ------------------- [ Static Getters ] ----------------------//
 int Account::getNbAccounts(void) 
 { 
-    return _nbAccounts; 
+    return (_nbAccounts); 
 }
 int Account::getTotalAmount(void) 
 { 
-    return _totalAmount; 
+    return (_totalAmount); 
 }
 int Account::getNbDeposits(void) 
 { 
-    return _totalNbDeposits; 
+    return (_totalNbDeposits); 
 }
 int Account::getNbWithdrawals(void) 
 { 
-    return _totalNbWithdrawals; 
+    return (_totalNbWithdrawals); 
 }
 // ------------------ [ Display Bank Info ] -------------------//
 void Account::displayAccountsInfos(void)
@@ -114,7 +127,7 @@ bool Account::makeWithdrawal(int withdrawal)
 // --------------------- [ Check Amount  ] ---------------------//
 int Account::checkAmount(void) const
 {
-    return _amount;
+    return (_amount);
 }
 
 // -------------------- [ Display Status ] --------------------//

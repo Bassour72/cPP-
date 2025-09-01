@@ -39,7 +39,7 @@ public:
     int addPhoneNumber(void);
     int addNickName(void);
     int addDarkestSecret(void);
-    static Contact addCo(void); 
+    Contact &addCo(void); 
     bool exists() const;
     void setExists(bool val);
     void markAsExists();

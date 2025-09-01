@@ -1,24 +1,13 @@
 #include <iostream>
 #include <string>
 
-bool isAlpha(char c) 
-{
-    return ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') );
-}
-
-bool isLower(char c) 
-{
-    return (c >= 'a' && c <= 'z');
-}
-
 void makeAllUpper(const std::string input) 
 {
-
     for (size_t i = 0; i < input.size(); i++) 
     {
         char ch = input[i];
-        if (isAlpha(ch) && isLower(ch))
-            std::cout <<(char)(ch - 32);
+        if (std::isalpha(ch) && std::islower(ch))
+            std::cout <<(char)(std::toupper(ch));
         else
             std::cout << ch;
     }
@@ -33,7 +22,8 @@ int main(int argc, char const *argv[])
             makeAllUpper(argv[i]);
         }
         std::cout << std::endl;
-    } else 
+    } 
+    else 
     {
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     }
