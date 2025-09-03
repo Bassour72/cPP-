@@ -1,12 +1,16 @@
 #include "PhoneBook.hpp"
 
-bool IsDigits(std::string input)
+bool isStringDigits(std::string input)
 {
+    if (input.empty())
+        return false;
     for (size_t i = 0; i < input.size(); i++)
     {   
         if (!std::isdigit(input[i]))
             return (false);
     }
+    if (input.size() >= 2)
+        return (false);
     return (true);
 }
 
@@ -14,7 +18,7 @@ bool IsDigits(std::string input)
  {
     std::string input;
     std::cout << display << std::endl;
-    std::cin >> input;
+    std::getline(std::cin, input, '\n');
     while (std::cin.fail() || std::cin.eof())
     {
         if (std::cin.eof()) 
@@ -32,40 +36,31 @@ bool IsDigits(std::string input)
             std::cin >> input;
          }
     }
-    if (!IsDigits(input))
+    if (!isStringDigits(input))
         return (-1);
     return (std::stoi(input)); 
  }
 
 void pause_prompt(const char* sms)
 {
-    std::string dummy;
-    std::cout << sms << std::endl;
+    std::string dummy = "";
+    std::cout << sms  << std::endl;
     std::cin.clear();
     std::getline(std::cin, dummy);
     
 }
-std::string ReadUserEnter(std::string display)
-{
-    std::string input;
-    std::cout << display << std::endl;
-    std::getline(std::cin, input);
-    if (std::cin.eof())
-        return "";
-    
-    return input;
-}
+
 void startPhoneBook(void)
 {
     PhoneBook phonebook;
     int totalContacts = 0;
     int index = 0;
-    std::string input;
+    std::string input = "";
 
     while (true)
     {
         phonebook.displayPhonebookMenu();
-        std::getline(std::cin, input);
+        std::getline(std::cin, input, '\n');
         
         if (std::cin.eof())
             return;
@@ -74,7 +69,6 @@ void startPhoneBook(void)
         {
             if (phonebook.createPhoneBookProfile(totalContacts))
                 totalContacts = phonebook.getContactCount();
-            std::cout << totalContacts << std::endl;
             pause_prompt("Press enter to continue...");
         }
         else if (input.compare("SEARCH") == 0)
@@ -85,7 +79,6 @@ void startPhoneBook(void)
                 pause_prompt("Press enter to continue...");
                 continue;
             }
-
             phonebook.displayContactList(totalContacts);
             index = read_ini("Enter index :");
             if (index < 0)
@@ -103,13 +96,12 @@ void startPhoneBook(void)
         {
             return;
         }
-        else
+        else if (!input.empty())
         {
-            std::cout << "Invalid input `" << input << "`" << std::endl;
+            std::cout << "Invalid input `" << input << "` \n";
             pause_prompt("Press enter to continue...");
         }
-
-        std::cin.clear();
+        system("clear");
     }
 }
 

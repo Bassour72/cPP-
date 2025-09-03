@@ -1,11 +1,9 @@
-
-
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = main
 
-SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+SRCS = main.cpp FileReplacer.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -16,7 +14,7 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 
-%.o: %.cpp  HumanA.hpp HumanB.hpp Weapon.hpp
+%.o: %.cpp  FileReplacer.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
@@ -26,4 +24,4 @@ fclean: clean
 	rm -f $(NAME)
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 

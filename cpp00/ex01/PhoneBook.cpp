@@ -3,20 +3,15 @@
 PhoneBook::PhoneBook() 
 {
     _maxPhoneBookContact = 0;
+    _indexPhoneBookContact =0;
+
 }
 
 PhoneBook::~PhoneBook()
 {
 
 }
-std::string PhoneBook::readUserEnter(std::string display)
-{
-    std::string input;
-    std::cout << display << std::endl;
-    std::getline(std::cin, input);
-    
-    return input;
-}
+
 void PhoneBook::displayPhonebookMenu(void) 
 {
     std::cout << "========================================" << std::endl;
@@ -32,19 +27,23 @@ void PhoneBook::displayPhonebookMenu(void)
 
 int PhoneBook::createPhoneBookProfile(int pos) 
 {
-    int totalContact = getContactCount();
-
-    pos = totalContact % 8;
-    contacts[pos].addCo();
-
-    if (!contacts[pos].exists())
-        return 0;
-    if (totalContact < 8)
-        setMaxContacts(totalContact + 1);
+    int index = getIndex();
+    (void)pos;
+    contacts[index].addCo();
+    if (contacts[index].exists())
+    {
+        std::cout << "Contact created successfully" << std::endl;
+        if (getContactCount() < 8)
+            setMaxContacts(getContactCount() + 1);
+        setIndex((index + 1) % 8);
+        return 1;
+    }
     else
-        setMaxContacts(8);
-
-    return 1;
+    {
+        std::cout << "Error: cannot create contact" << std::endl;
+        contacts[index].markAsExists();
+        return (0);
+    }
 }
 
 std::string PhoneBook::formatField(const std::string &field)
@@ -68,7 +67,7 @@ void PhoneBook::displayContactByIndex(int pos, int totalContacts)
     std::cout << "📞 Phone Number    : " << c.getPhoneNumber() << std::endl;
     std::cout << "🏷️  Nickname       : " << c.getNickName() << std::endl;
     std::cout << "🔒 Darkest Secret  : " << c.getDarkestSecret() << std::endl;
-    std::cout << "-----------------------------------------\n" << std::endl;
+    std::cout << "-----------------------------------------" << std::endl;
 }
 
 void PhoneBook::displayContactList(int pos)
@@ -78,20 +77,24 @@ void PhoneBook::displayContactList(int pos)
         std::cout << "⚠️  No contacts yet." << std::endl;
         return;
     }
-    std::cout << "┌──────────┬──────────┬──────────┬──────────┐" << std::endl;
-    std::cout << "│     Index│First Name│ Last Name│  Nickname│" << std::endl;
-    std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
+    std::cout << "+----------+----------+----------+----------+\n";
+    std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
+    std::cout << "+----------+----------+----------+----------+\n";
+
     for (int i = 0; i < getContactCount(); i++)
     {
-        std::cout << "│" << std::setw(10) << i + 1
-                  << "│" << formatField(contacts[i].getFirstName())
-                  << "│" << formatField(contacts[i].getLastName())
-                  << "│" << formatField(contacts[i].getNickName())
-                  << "│" << std::endl;
+        std::cout << "|" 
+                << std::setw(10) << i + 1
+                << "|" << formatField(contacts[i].getFirstName())
+                << "|" << formatField(contacts[i].getLastName())
+                << "|" << formatField(contacts[i].getNickName())
+                << "|\n";
+
         if (i < getContactCount() - 1)
-            std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
+            std::cout << "+----------+----------+----------+----------+\n";
     }
-    std::cout << "└──────────┴──────────┴──────────┴──────────┘" << std::endl;
+
+    std::cout << "+----------+----------+----------+----------+\n";
 }
 
 int PhoneBook::getContactCount() const
@@ -101,4 +104,15 @@ int PhoneBook::getContactCount() const
 void    PhoneBook::setMaxContacts(int maxPhoneBookContact)
 {
     PhoneBook::_maxPhoneBookContact = maxPhoneBookContact;
+}
+
+
+int PhoneBook::getIndex()
+{
+    return _indexPhoneBookContact;
+}
+
+void PhoneBook::setIndex(int index)
+{
+    _indexPhoneBookContact = index;
 }

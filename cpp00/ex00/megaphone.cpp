@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+
 void makeAllUpper(const std::string input) 
 {
     for (size_t i = 0; i < input.size(); i++) 
@@ -13,7 +14,7 @@ void makeAllUpper(const std::string input)
     }
 }
 
-int main(int argc, char const *argv[]) 
+int main(int argc, char const *argv[])
 {
     if (argc > 1) 
     {
@@ -27,5 +28,5 @@ int main(int argc, char const *argv[])
     {
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     }
-    return 0;
+    return (0);
 }

@@ -1,70 +1,84 @@
 #include "Contact.hpp"
-#include "Contact.hpp"
-#include "Contact.hpp"
 
 Contact::Contact(/* args */)
 {
-    this->markAsExists();
+    markAsExists();
+    //_exists = true;
 }
 
 void Contact::setFirstName(std::string FirstName)
 {
-    this->_first_name = FirstName;
+    this->_firstName = FirstName;
 }
 void Contact::setLastName(std::string LastName)
 {
-    this->_last_name = LastName;
+    this->_lastName = LastName;
 }
 void Contact::setNickName(std::string NickName)
 {
-    this->_nickname = NickName;
+    this->_nickName = NickName;
 }
 void Contact::setPhoneNumber(std::string PhoneNumber)
 {
-    this->_phone_number = PhoneNumber;
+    this->_phoneNumber = PhoneNumber;
 }
 
 void Contact::setDarkestSecret(std::string DarkestSecret)
 {
-    this->_darkest_secret = DarkestSecret;
+    this->_darkestSecret = DarkestSecret;
 }
     /// getters
 std::string Contact::getFirstName(void)
 {
-    return (this->_first_name);
+    return (this->_firstName);
 }
 std::string Contact::getLastName(void)
 {
-    return (this->_last_name);
+    return (this->_lastName);
 }
 std::string Contact::getNickName(void)
 {
-    return (this->_nickname);
+    return (this->_nickName);
 }
 std::string Contact::getPhoneNumber(void)
 {
-    return (this->_phone_number);
+    return (this->_phoneNumber);
 }
 std::string Contact::getDarkestSecret(void)
 {
-    return (this->_darkest_secret);
+    return (this->_darkestSecret);
 }
 
 bool Contact::isValidName(const std::string &name)
 {
+      int count_alph = 0;
     if (name.empty())
         return (false);
     for (size_t i = 0; i < name.length(); i++)
     {
-        if (!std::isalpha((char)(name[i])))
+        if (!std::isalpha((char)(name[i])) && !std::isspace((char)(name[i])))
             return (false);
+        if (std::isalpha((char)(name[i])))
+            count_alph++;
     }
+    if (count_alph == 0)
+        return (false);
     return (true);
 }
 
 bool Contact::isValidDarkestSecret(const std::string &secret)
 {
+    int count_alph = 0;
     if (secret.empty())
+        return (false);
+    for (size_t i = 0; i < secret.length(); i++)
+    {
+        if (!std::isalpha((char)(secret[i])) && !std::isspace((char)(secret[i])) && !std::isdigit((char)(secret[i])))
+            return (false);
+        if (std::isalpha((char)(secret[i])))
+            count_alph++;
+    }
+    if (count_alph == 0)
         return (false);
     return (true);
 }
@@ -76,7 +90,7 @@ bool Contact::isPhoneNumber(const std::string &name)
         return false;
     if (name[i] == '+')
         i++;
-    for (i = 0; i < name.length(); i++)
+    for (; i < name.length(); i++)
     {
         if (!std::isdigit((char)(name[i])))
             return false;
@@ -84,17 +98,9 @@ bool Contact::isPhoneNumber(const std::string &name)
     return (true);
 }
 
-std::string Contact::readUserEnter(std::string display)
-{
-    std::string input;
-    std::cout << display << std::endl;
-    std::getline(std::cin, input);
-    
-    return (input);
-}
-
 int Contact::addFirstName(void) 
 {
+  
     std::string input = readUserEnter("Enter the first name: ");
     if (!this->isValidName(input))
     {
@@ -136,7 +142,7 @@ int Contact::addNickName(void)
     {
         this->setExists(false);
         return (0);
-    };
+    }
     this->setNickName(input);
     return (1);
 }
@@ -167,24 +173,31 @@ void Contact::markAsExists()
 {
     this->_exists = true;
 }
-
-
-Contact &Contact::addCo(void)
+bool Contact::addCo(void)
 {
-    this->addFirstName();
-    this->addLastName();
-    this->addPhoneNumber();
-    this->addNickName();
-    this->addDarkestSecret();
-
-    if (this->exists())
-        std::cout << "Contact create successfully " << std::endl;
-    else
-        std::cout << "Error: cannot create contact " << std::endl;
-
-    return *this;
+    
+    if (this->addFirstName()== 0)
+        return false;
+    if (this->addLastName() == 0)
+        return false;
+    if (this->addPhoneNumber()== 0)
+        return false;
+    if (this->addNickName()== 0)
+        return false;
+    if (this->addDarkestSecret() == 0)
+        return false;
+    return true;
 }
-
+std::string readUserEnter(std::string display)
+{
+    std::string input;
+    std::cout << display << std::endl;
+    std::getline(std::cin, input, '\n');
+    if (std::cin.eof())
+        return "";
+    
+    return input;
+}
 Contact::~Contact()
 {
 }
