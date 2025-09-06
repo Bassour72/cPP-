@@ -15,7 +15,7 @@ private:
 public:
 		PhoneBook();
 		int			getContactCount() const;
-		int			createPhoneBookProfile(int pos);
+		int			createPhoneBookProfile();
 		std::string	formatField(const std::string &field);
 		void		setMaxContacts(int maxPhoneBookContact);
 		void		displayContactList(int pos);

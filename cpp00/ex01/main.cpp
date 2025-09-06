@@ -14,6 +14,7 @@ bool isStringDigits(std::string input)
     return (true);
 }
 
+
  int read_ini(std::string display)
  {
     std::string input;
@@ -38,7 +39,7 @@ bool isStringDigits(std::string input)
     }
     if (!isStringDigits(input))
         return (-1);
-    return (std::stoi(input)); 
+    return (std::atoi(input.c_str())); 
  }
 
 void pause_prompt(const char* sms)
@@ -67,7 +68,7 @@ void startPhoneBook(void)
 
         if (input.compare("ADD") == 0)
         {
-            if (phonebook.createPhoneBookProfile(totalContacts))
+            if (phonebook.createPhoneBookProfile())
                 totalContacts = phonebook.getContactCount();
             pause_prompt("Press enter to continue...");
         }

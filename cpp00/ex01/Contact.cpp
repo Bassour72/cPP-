@@ -3,7 +3,6 @@
 Contact::Contact(/* args */)
 {
     markAsExists();
-    //_exists = true;
 }
 
 void Contact::setFirstName(std::string FirstName)
@@ -188,7 +187,7 @@ bool Contact::addCo(void)
         return false;
     return true;
 }
-std::string readUserEnter(std::string display)
+std::string Contact::readUserEnter(std::string display)
 {
     std::string input;
     std::cout << display << std::endl;

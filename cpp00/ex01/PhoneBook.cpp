@@ -25,10 +25,10 @@ void PhoneBook::displayPhonebookMenu(void)
 }
 
 
-int PhoneBook::createPhoneBookProfile(int pos) 
+
+int PhoneBook::createPhoneBookProfile() 
 {
     int index = getIndex();
-    (void)pos;
     contacts[index].addCo();
     if (contacts[index].exists())
     {

@@ -26,6 +26,7 @@ public:
    std::string	getNickName(void);
    std::string	getPhoneNumber(void);
    std::string	getDarkestSecret(void);
+   std::string		readUserEnter(std::string display = "");
    //// 
 	bool		isValidName(const std::string &name);
 	bool		isValidDarkestSecret(const std::string &name);
@@ -43,5 +44,5 @@ public:
 	void		markAsExists();
 	~Contact();
 };
-std::string		readUserEnter(std::string display = "");
+
 #endif

@@ -4,12 +4,6 @@ int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
-int Account::_year = 0;
-int Account::_month = 0;
-int Account::_day = 0;
-int Account::_minutes = 0;
-int Account::_hours = 0;
-int Account::_seconds = 0;
 // ---------------------- [ Constructor ] ----------------------//
 Account::Account(int initial_deposit)
 {
@@ -124,6 +118,9 @@ bool Account::makeWithdrawal(int withdrawal)
     return (true);
 }
 
+
+
+
 // --------------------- [ Check Amount  ] ---------------------//
 int Account::checkAmount(void) const
 {
@@ -146,30 +143,37 @@ void Account::_displayTimestamp(void)
 {
     time_t timestamp = time(NULL);
     tm datetime = *localtime(&timestamp);
-    _year = datetime.tm_year + 1900;
-    _month = datetime.tm_mon + 1;
-    _day = datetime.tm_mday;
-    _seconds = datetime.tm_sec;
-	_hours =datetime.tm_hour;
-	_minutes = datetime.tm_min;
-    Print_date_DDMMYYYY();
-}
-void Account::printWithZero(int value) 
-{
-    if (value < 10) 
-        std::cout << '0';
-    std::cout << value;
-}
 
-void Account::Print_date_DDMMYYYY(void)
-{
-    std::cout << "[" << _year;
-    printWithZero(_month);
-    printWithZero(_day);
-    std::cout << "_";
-    printWithZero(_hours);
-    printWithZero(_minutes);
-    printWithZero(_seconds);
+    int year = datetime.tm_year + 1900;
+    int month = datetime.tm_mon + 1;
+    int day = datetime.tm_mday;
+    int hours = datetime.tm_hour;
+    int minutes = datetime.tm_min;
+    int seconds = datetime.tm_sec;
+
+    std::cout << "[" << year;
+
+    if (month < 10) 
+        std::cout << '0';
+    std::cout << month;
+
+    if (day < 10) 
+        std::cout << '0';
+    std::cout << day << "_";
+
+    if (hours < 10) 
+        std::cout << '0';
+    std::cout << hours;
+
+    if (minutes < 10) 
+        std::cout << '0';
+    std::cout << minutes;
+
+    if (seconds < 10) 
+        std::cout << '0';
+    std::cout << seconds;
+
     std::cout << "]";
 }
+
 

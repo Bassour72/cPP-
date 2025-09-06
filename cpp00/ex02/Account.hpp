@@ -25,7 +25,6 @@ class Account
 public:
 
 	typedef Account		t;
-	static void	Print_date_DDMMYYYY(void);
 	static int	getNbAccounts( void );
 	static int	getTotalAmount( void );
 	static int	getNbDeposits( void );
@@ -46,17 +45,10 @@ private:
 	static int	_totalNbWithdrawals;
 
 	static void	_displayTimestamp( void );
-	static void printWithZero(int value);
 	int			_accountIndex;
 	int			_amount;
 	int			_nbDeposits;
 	int			_nbWithdrawals;
-	static int	_year;
-   	static int	_month;
-   	static int  _day;
-	static int	_seconds;
-	static int 	_hours;
-	static int	_minutes;
 	Account( void );
 
 };
@@ -72,3 +64,4 @@ private:
 
 
 #endif /* __ACCOUNT_H__ */
+
