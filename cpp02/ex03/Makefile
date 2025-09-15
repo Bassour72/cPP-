@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = Fixed
 
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp bsp.cpp Point.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -14,7 +14,7 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 
-%.o: %.cpp Fixed.hpp
+%.o: %.cpp Fixed.hpp Point.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
