@@ -1,9 +1,9 @@
-NAME      = DiamondTrap
+NAME      = Animal
 
 CPP       = c++
-CPPFLAGS  = -Wall -Wextra -Werror -std=c++98  -Wshadow
+CPPFLAGS  = -Wall -Wextra -Werror -std=c++98  #-Wshadow
 
-SRC       = main.cpp ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp 
+SRC       = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJ       = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -11,7 +11,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.cpp ClapTrap.hpp FragTrap.hpp ScavTrap.hpp  DiamondTrap.hpp
+%.o: %.cpp Dog.hpp Cat.hpp Animal.hpp  Brain.hpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
