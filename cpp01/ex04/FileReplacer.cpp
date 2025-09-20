@@ -61,10 +61,14 @@ bool FileReplacer::replaceFileContent() const
     }
 
     std::string line;
-    while (std::getline(inputFile, line))
-    {
-        outputFile << searchAndReplace(line) << '\n';
+   while (std::getline(inputFile, line)) 
+   {
+        bool hasNewline = !inputFile.eof();
+        if (hasNewline)
+            line.push_back('\n');
+        outputFile << searchAndReplace(line);
     }
+
 
     return (true);
 }
