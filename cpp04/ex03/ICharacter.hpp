@@ -2,8 +2,8 @@
 #define ICHARACTER_HPP
 
 #include <iostream>
-#include "ICharacter.hpp"
 #include "AMateria.hpp"
+class AMateria;
 class ICharacter
 {
 private:
@@ -17,13 +17,4 @@ public:
     virtual void use(int idx, ICharacter& target) = 0;
 };
 
-ICharacter::ICharacter(/* args */)
-{
-
-};
-
-ICharacter::~ICharacter(/* args */)
-{
-
-};
 #endif /* ICHARACTER_HPP */
